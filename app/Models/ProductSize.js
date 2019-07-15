@@ -15,6 +15,10 @@ class ProductSize extends Model {
       }
     });
   }
+
+  productType() {
+    return this.hasMany("App/Models/ProductType");
+  }
 }
 
 module.exports = ProductSize;

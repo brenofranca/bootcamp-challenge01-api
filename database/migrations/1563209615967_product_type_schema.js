@@ -13,6 +13,14 @@ class ProductTypeSchema extends Schema {
         .notNullable()
         .unique();
 
+      table
+        .integer("product_id")
+        .unsigned()
+        .references("id")
+        .inTable("products")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
+
       table.timestamps();
     });
   }

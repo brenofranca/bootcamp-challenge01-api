@@ -10,7 +10,12 @@ class ProductSizeController {
   }
 
   async store({ request }) {
-    const data = await request.only(["name", "short_name", "unity"]);
+    const data = await request.only([
+      "name",
+      "short_name",
+      "unity",
+      "product_type_id"
+    ]);
 
     const productSize = await ProductSize.create(data);
 
@@ -26,7 +31,12 @@ class ProductSizeController {
   async update({ params, request }) {
     const productSize = await ProductSize.findOrFail(params.id);
 
-    const data = await request.only(["name", "short_name", "unity"]);
+    const data = await request.only([
+      "name",
+      "short_name",
+      "unity",
+      "product_type_id"
+    ]);
 
     productSize.merge(data);
 
