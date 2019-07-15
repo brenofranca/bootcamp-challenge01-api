@@ -8,6 +8,11 @@ Route.get("/", () => {
 
 Route.post("/api/account/signup", "SignUpController.store");
 Route.post("/api/account/signin", "SignInController.store");
+
 Route.resource("/api/products", "ProductController")
+  .apiOnly()
+  .middleware("auth");
+
+Route.resource("/api/product-types", "ProductTypeController")
   .apiOnly()
   .middleware("auth");
