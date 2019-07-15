@@ -7,3 +7,4 @@ Route.get("/", () => {
 });
 
 Route.post("/api/account/signup", "SignUpController.store");
+Route.post("/api/account/signin", "SignInController.store");
