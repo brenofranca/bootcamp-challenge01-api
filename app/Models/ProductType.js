@@ -8,7 +8,9 @@ class ProductType extends Model {
   }
 
   sizes() {
-    return this.hasMany("App/Models/ProductSize");
+    return this.belongsToMany("App/Models/ProductSize").pivotModel(
+      "App/Models/ProductPrice"
+    );
   }
 }
 

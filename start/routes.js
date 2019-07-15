@@ -20,3 +20,7 @@ Route.resource("/api/product-types", "ProductTypeController")
 Route.resource("/api/product-sizes", "ProductSizeController")
   .apiOnly()
   .middleware("auth");
+
+Route.resource("/api/product-prices", "ProductPriceController")
+  .apiOnly()
+  .middleware("auth");

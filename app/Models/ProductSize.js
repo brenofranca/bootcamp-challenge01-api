@@ -16,8 +16,10 @@ class ProductSize extends Model {
     });
   }
 
-  productType() {
-    return this.hasMany("App/Models/ProductType");
+  types() {
+    return this.belongsToMany("App/Models/ProductType").pivotModel(
+      "App/Models/ProductPrice"
+    );
   }
 }
 

@@ -17,14 +17,6 @@ class ProductSizeSchema extends Schema {
 
       table.string("unity", 20).defaultTo("cm");
 
-      table
-        .integer("product_type_id")
-        .unsigned()
-        .references("id")
-        .inTable("product_types")
-        .onUpdate("CASCADE")
-        .onDelete("CASCADE");
-
       table.timestamps();
     });
   }
