@@ -4,7 +4,9 @@ const Product = use("App/Models/Product");
 
 class ProductController {
   async index({}) {
-    const products = await Product.all();
+    const products = await Product.query()
+      .with("file")
+      .fetch();
 
     return products;
   }
@@ -18,7 +20,9 @@ class ProductController {
   }
 
   async show({ params }) {
-    const product = await Product.findOrFail(params.id);
+    const product = await Product.find(params.id);
+
+    await product.load("file");
 
     return product;
   }

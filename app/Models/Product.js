@@ -10,7 +10,8 @@ class Product extends Model {
   productType() {
     return this.hasMany("App/Models/ProductType");
   }
-  image() {
+
+  file() {
     return this.hasOne("App/Models/ProductImage");
   }
 }
