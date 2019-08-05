@@ -12,6 +12,12 @@ class ProductType extends Model {
       "App/Models/ProductPrice"
     );
   }
+
+  images() {
+    return this.belongsToMany("App/Models/Image")
+      .pivotTable("product_type_image")
+      .withTimestamps();
+  }
 }
 
 module.exports = ProductType;

@@ -3,8 +3,11 @@
 const ProductType = use("App/Models/ProductType");
 
 class ProductTypeController {
-  async index({}) {
-    const productTypes = await ProductType.all();
+  async index({ params }) {
+    const productTypes = await ProductType.query()
+      .where("product_id", params.products_id)
+      .with("images")
+      .fetch();
 
     return productTypes;
   }
@@ -14,16 +17,20 @@ class ProductTypeController {
 
     const productType = await ProductType.create(data);
 
+    await this.associateImages({ request, productType });
+
     return productType;
   }
 
   async show({ params }) {
     const productType = await ProductType.findOrFail(params.id);
 
+    await productType.load("images");
+
     return productType;
   }
 
-  async update({ params, request, response }) {
+  async update({ params, request }) {
     const productType = await ProductType.findOrFail(params.id);
 
     const data = await request.only(["name", "product_id"]);
@@ -32,6 +39,8 @@ class ProductTypeController {
 
     await productType.save();
 
+    await this.associateImages({ request, productType });
+
     return productType;
   }
 
@@ -39,6 +48,14 @@ class ProductTypeController {
     const productType = await ProductType.findOrFail(params.id);
 
     await productType.delete();
+  }
+
+  async associateImages({ request, productType }) {
+    const imagesIds = await request.input("images");
+
+    if (imagesIds) {
+      await productType.images().attach(imagesIds);
+    }
   }
 }
 

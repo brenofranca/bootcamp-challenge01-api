@@ -21,6 +21,12 @@ class ProductSize extends Model {
       "App/Models/ProductPrice"
     );
   }
+
+  images() {
+    return this.belongsToMany("App/Models/Image")
+      .pivotTable("product_size_image")
+      .withTimestamps();
+  }
 }
 
 module.exports = ProductSize;

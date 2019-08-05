@@ -14,6 +14,8 @@ class ProductSchema extends Schema {
 
       table.string("description", 255);
 
+      table.string("time", 10);
+
       table.timestamps();
     });
   }

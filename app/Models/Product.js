@@ -11,8 +11,10 @@ class Product extends Model {
     return this.hasMany("App/Models/ProductType");
   }
 
-  file() {
-    return this.hasOne("App/Models/ProductImage");
+  images() {
+    return this.belongsToMany("App/Models/Image")
+      .pivotTable("product_image")
+      .withTimestamps();
   }
 }
 

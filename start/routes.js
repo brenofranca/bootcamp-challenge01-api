@@ -9,18 +9,18 @@ Route.get("/", () => {
 Route.post("/api/account/signup", "SignUpController.store");
 Route.post("/api/account/signin", "SignInController.store");
 
-Route.get("/products/:products_id/image/:id", "ProductImageController.show");
+Route.get("/image/:id", "ImageController.show");
 
 Route.group(() => {
   Route.resource("products", "ProductController").apiOnly();
 
-  Route.resource("product-types", "ProductTypeController").apiOnly();
+  Route.resource("products.product-types", "ProductTypeController").apiOnly();
 
   Route.resource("product-sizes", "ProductSizeController").apiOnly();
 
   Route.resource("product-prices", "ProductPriceController").apiOnly();
 
-  Route.resource("products.image", "ProductImageController").apiOnly();
+  Route.resource("image", "ImageController").apiOnly();
 })
   .prefix("/api")
   .middleware(["auth"]);

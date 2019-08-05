@@ -5,12 +5,9 @@ const Schema = use("Schema");
 
 class ProductImageSchema extends Schema {
   up() {
-    this.create("product_images", table => {
+    this.create("product_image", table => {
       table.increments();
-      table.string("hash").notNullable();
-      table.string("name").notNullable();
-      table.string("type", 20);
-      table.string("subtype", 20);
+
       table
         .integer("product_id")
         .unsigned()
@@ -18,12 +15,21 @@ class ProductImageSchema extends Schema {
         .inTable("products")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
+
+      table
+        .integer("image_id")
+        .unsigned()
+        .references("id")
+        .inTable("images")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
+
       table.timestamps();
     });
   }
 
   down() {
-    this.drop("product_images");
+    this.drop("product_image");
   }
 }
 
