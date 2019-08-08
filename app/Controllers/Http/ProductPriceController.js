@@ -4,11 +4,14 @@ const ProductType = use("App/Models/ProductType");
 const ProductPrice = use("App/Models/ProductPrice");
 
 class ProductPriceController {
-  async index({}) {
+  async index({ params }) {
+    const { types_id } = params;
+
     const productPrices = await ProductPrice.query()
       .with("product")
       .with("productSize")
       .with("productSize.images")
+      .where("product_type_id", types_id)
       .fetch();
 
     return productPrices;

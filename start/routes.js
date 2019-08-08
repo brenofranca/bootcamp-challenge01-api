@@ -18,7 +18,10 @@ Route.group(() => {
 
   Route.resource("product-sizes", "ProductSizeController").apiOnly();
 
-  Route.resource("product-prices", "ProductPriceController").apiOnly();
+  Route.resource(
+    "product-types.product-prices",
+    "ProductPriceController"
+  ).apiOnly();
 
   Route.resource("image", "ImageController").apiOnly();
 })
