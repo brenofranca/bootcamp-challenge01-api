@@ -5,9 +5,13 @@ const ProductPrice = use("App/Models/ProductPrice");
 
 class ProductPriceController {
   async index({}) {
-    const ProductPrices = await ProductPrice.all();
+    const productPrices = await ProductPrice.query()
+      .with("product")
+      .with("productSize")
+      .with("productSize.images")
+      .fetch();
 
-    return ProductPrices;
+    return productPrices;
   }
 
   async store({ request }) {
@@ -30,7 +34,12 @@ class ProductPriceController {
   }
 
   async show({ params }) {
-    const productPrice = await ProductPrice.findOrFail(params.id);
+    const productPrice = await ProductPrice.query()
+      .with("product")
+      .with("productSize")
+      .with("productSize.images")
+      .where("id", params.id)
+      .fetch();
 
     return productPrice;
   }

@@ -7,11 +7,14 @@ class ProductPrice extends Model {
     super.boot();
   }
 
-  productType() {
-    return this.belongsTo("App/Models/ProductType");
+  product() {
+    return this.belongsTo("App/Models/Product");
   }
   productSize() {
     return this.belongsTo("App/Models/ProductSize");
+  }
+  productType() {
+    return this.belongsTo("App/Models/ProductType");
   }
 }
 
